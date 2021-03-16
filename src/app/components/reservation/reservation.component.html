@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-sm">
+                    <h3>Reservation List</h3>
+                </div>
+                <div class="col-sm">
+                    Lore ipsum One of three columns
+                </div>
+                <div class="col-sm">
+                    <form class="d-flex">
+                        <button type="submit" class="btn btn-secondary">CREATE RESERVATION</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header text-center">Create Reservation</div>
+                <div class="card-body">
+
+                    <form [formGroup]="form" (ngSubmit)="addReservation()">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="far fa-user" 
+                                [class.green-icon]="this.form.get('title')?.valid"
+                                [class.red-icon]="this.form.get('title')?.invalid && this.form.get('title')?.touched"
+                                ></i></span>
+                            <input formControlName="title" type="text" class="form-control" placeholder="title">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="far fa-credit-card" 
+                                [class.green-icon]="this.form.get('numberRes')?.valid"
+                                [class.red-icon]="this.form.get('numberRes')?.invalid && this.form.get('numberRes')?.touched"></i></span>
+                            <input formControlName="numberRes" maxlength="3" type="text" class="form-control" placeholder="number of reservation">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-calendar-week"
+                                [class.green-icon]="this.form.get('dateBooking')?.valid"
+                                [class.red-icon]="this.form.get('dateBooking')?.invalid && this.form.get('dateBooking')?.touched"></i></span>
+                            <input formControlName="dateBooking" type="text" class="form-control" placeholder="Date of reservation">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-key"
+                                [class.green-icon]="this.form.get('rating')?.valid"
+                                [class.red-icon]="this.form.get('rating')?.invalid && this.form.get('rating')?.touched"></i></span>
+                            <input formControlName="rating" maxlength="1" type="text" class="form-control" placeholder="rating">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" type="submit"><i class="fas fa-user-plus"> Aceptar </i></button>
+                        </div>
+                    </form>
+
+
+
+                </div>
+                <div class="card-footer">Footer</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header text-center">Reservation List</div>
+                <div class="card-body">
+
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let reservationAux of listReservations">
+                                <td>{{reservationAux.title}}</td>
+                                <td>{{reservationAux.numberRes}}</td>
+                                <td>{{reservationAux.dateBooking}}</td>
+                                <td>{{reservationAux.rating}}</td>
+                                <td><i class="far fa-edit text-info"></i></td>
+                                <td><i (click)="deleteReservation(reservationAux.id)" class="far fa-trash-alt text-danger"></i></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer">Footer</div>
+            </div>
+        </div>
+    </div>
+</div>
